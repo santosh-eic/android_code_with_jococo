@@ -16,6 +16,11 @@ dependencies {
     testImplementation "junit:junit:4.13"
 }
 
+
+jacoco {
+    toolVersion = '0.8.8'  // Specify the version of JaCoCo
+}
+
 jacocoTestReport {
     reports {
         xml.enabled true  // Enable XML report for SonarCloud
