@@ -37,12 +37,20 @@ jobs:
         generate-branches-badge: true
         jacoco-csv-file: build/reports/jacoco/test/jacocoTestReport.csv
 
-    - name: Upload JaCoCo Report to SonarCloud
-      run: ./gradlew sonarqube \
-        -Dsonar.projectKey=santosh-eic_android_code_with_jococo \
-        -Dsonar.organization=santosh-eic \
-        -Dsonar.host.url=https://sonarcloud.io \
-        -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-         
-    - name: Upload JaCoCo Report to SonarCloud
-      run: ./gradlew sonarqube -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+    # - name: Upload JaCoCo Report to SonarCloud
+    #   run: ./gradlew sonarqube \
+    #     -Dsonar.projectKey=santosh-eic_android_code_with_jococo \
+    #     -Dsonar.organization=santosh-eic \
+    #     -Dsonar.host.url=https://sonarcloud.io \
+    #     -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
+    # - name: Upload JaCoCo Report to SonarCloud
+    #   run: ./gradlew sonarqube -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
+    - name: Build with Gradle
+      run: ./gradlew build
+
+    - name: Run SonarQube analysis
+      run: ./gradlew sonarqube
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
