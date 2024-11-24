@@ -36,3 +36,14 @@ jobs:
       with:
         generate-branches-badge: true
         jacoco-csv-file: build/reports/jacoco/test/jacocoTestReport.csv
+
+    - name: Set up SonarCloud
+      uses: sonarsource/sonarcloud-github-action@v3
+      with:
+        organization: santosh-eic  # Replace with your SonarCloud organization key
+        projectKey: santosh-eic_android_code_with_jococo  # Replace with your SonarCloud project key
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # You must set the SONAR_TOKEN secret in your GitHub repository
+  
+    - name: Upload JaCoCo Report to SonarCloud
+      run: ./gradlew sonarqube -Dsonar.login=${{ secrets.SONAR_TOKEN }}

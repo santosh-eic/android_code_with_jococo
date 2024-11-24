@@ -1,6 +1,11 @@
-apply plugin: 'java'
-apply plugin: "jacoco"
+// apply plugin: 'java'
+// apply plugin: "jacoco"
 
+plugins {
+    id 'java'
+    id 'jacoco'
+    id 'org.sonarqube' version '3.0'
+}
 
 
 repositories {
@@ -13,8 +18,20 @@ dependencies {
 
 jacocoTestReport {
     reports {
+        xml.enabled true  // Enable XML report for SonarCloud
+        html.enabled true // Enable HTML report for local viewing
         csv.enabled true
     }
 }
 
 check.dependsOn jacocoTestReport
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "santosh-eic_android_code_with_jococo"   // Replace with your project key from SonarCloud
+        property "sonar.organization", "santosh-eic"     // Replace with your organization key from SonarCloud
+        property "sonar.host.url", "https://sonarcloud.io"
+        property "sonar.login", project.findProperty("sonar.token")  // Make sure to pass the SonarCloud token securely
+        property "sonar.javascript.lcov.reportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"  // Link the JaCoCo XML report
+    }
+}
