@@ -37,32 +37,13 @@ jobs:
         generate-branches-badge: true
         jacoco-csv-file: build/reports/jacoco/test/jacocoTestReport.csv
 
-    # - name: Set up SonarCloud
-    #   uses: sonarsource/sonarcloud-github-action@v3
-    #   env:
-    #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-    #     SONAR_PROJECT_KEY: "santosh-eic_android_code_with_jococo"  # Replace with your project key
-    #     SONAR_ORG_KEY: "santosh-eic"
-    #     SONAR_HOST_URL: "https://sonarcloud.io"
+    - name: Set up SonarCloud
+      uses: sonarsource/sonarcloud-github-action@v3
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_PROJECT_KEY: "santosh-eic_android_code_with_jococo"  # Replace with your project key
+        SONAR_ORG_KEY: "santosh-eic"
+        SONAR_HOST_URL: "https://sonarcloud.io"
       
-    # - name: Upload JaCoCo Report to SonarCloud
-    #   run: ./gradlew sonarqube -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-
-
-    - name: Install SonarScanner
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y openjdk-11-jre
-        wget -qO- https://sonarcloud.io/static/cpp/sonar-scanner-cli-4.7.0.2747-linux.zip -O sonar-scanner.zip
-        unzip sonar-scanner.zip
-        sudo mv sonar-scanner-4.7.0.2747-linux /opt/sonar-scanner
-        sudo ln -s /opt/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner
-
-    - name: Run SonarScanner to Upload to SonarCloud
-      run: |
-        sonar-scanner \
-          -Dsonar.organization=santosh-eic \
-          -Dsonar.projectKey=santosh-eic_android_code_with_jococo \
-          -Dsonar.sources=src \
-          -Dsonar.host.url=https://sonarcloud.io \
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }}    
+    - name: Upload JaCoCo Report to SonarCloud
+      run: ./gradlew sonarqube -Dsonar.login=${{ secrets.SONAR_TOKEN }}
