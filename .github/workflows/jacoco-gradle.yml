@@ -43,6 +43,7 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_PROJECT_KEY: "santosh-eic_android_code_with_jococo"  # Replace with your project key
         SONAR_ORG_KEY: "santosh-eic"
+        SONAR_HOST_URL: "https://sonarcloud.io"
       
     - name: Upload JaCoCo Report to SonarCloud
       run: ./gradlew sonarqube -Dsonar.login=${{ secrets.SONAR_TOKEN }}
