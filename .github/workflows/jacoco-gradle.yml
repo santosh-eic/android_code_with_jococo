@@ -31,12 +31,6 @@ jobs:
     - name: Run Test Coverage
       run: ./gradlew jacocoTestReport
 
-    # - name: Generate JaCoCo Badge
-    #   uses: cicirello/jacoco-badge-generator@v2
-    #   with:
-    #     generate-branches-badge: true
-    #     jacoco-csv-file: build/reports/jacoco/test/jacocoTestReport.csv
-
     - name: Display local test coverage (only API 30)
       id: jacoco
       uses: madrapps/jacoco-report@v1.7.0
@@ -57,36 +51,9 @@ jobs:
         overwrite: false
         path: '**/build/reports/jacoco/*' 
 
-    # - name: Cache SonarQube Cloud packages
-    #   uses: actions/cache@v4
-    #   with:
-    #     path: ~/.sonar/cache
-    #     key: ${{ runner.os }}-sonar
-    #     restore-keys: ${{ runner.os }}-sonar
-
-    # - name: Cache Gradle packages
-    #   uses: actions/cache@v4
-    #   with:
-    #     path: ~/.gradle/caches
-    #     key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-    #     restore-keys: ${{ runner.os }}-gradle
-
-    # - name: Build and analyze
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}  # Needed to get PR information, if any
-    #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-    #   run: ./gradlew build sonar --info        
-
-    # - name: Set up SonarQube
-    #   uses: sonarsource/sonarcloud-github-action@v2
-    #   with:
-    #     sonar-token: ${{ secrets.SONAR_TOKEN }} # Set this secret in GitHub
-    #     organization: santosh-eic # Replace with your SonarQube organization
-    #     project-key: santosh-eic_android_code_with_jococo # Replace with your project key
-    #     project-name: android_code_with_jococo # Replace with your project name
     - name: Set up SonarQube environment variables
       run: echo "SONAR_TOKEN=${{ secrets.SONAR_TOKEN }}" >> $GITHUB_ENV
 
     - name: Run SonarQube analysis
-      run: ./gradlew sonar -Dsonar.host.url=https://sonarcloud.io # Add your SonarQube server URL
+      run: ./gradlew sonar -Dsonar.host.url=https://sonarcloud.io 
 
