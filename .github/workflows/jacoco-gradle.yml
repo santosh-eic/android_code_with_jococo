@@ -37,6 +37,26 @@ jobs:
         generate-branches-badge: true
         jacoco-csv-file: build/reports/jacoco/test/jacocoTestReport.csv
 
+    - name: Display local test coverage (only API 30)
+      id: jacoco
+      uses: madrapps/jacoco-report@v1.7.0
+      with:
+        title: Combined test coverage report
+        min-coverage-overall: 40
+        min-coverage-changed-files: 60
+        paths: |
+          ${{ github.workspace }}/**/build/reports/jacoco/**/*Report.xml
+        token: ${{ secrets.GIT_TOKEN }}
+
+    - name: Upload local coverage reports (XML + HTML)
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-reports
+        if-no-files-found: error
+        compression-level: 1
+        overwrite: false
+        path: '**/build/reports/jacoco/*'  # This will upload both XML and HTML files from JaCoCo
+
     - name: Cache SonarQube Cloud packages
       uses: actions/cache@v4
       with:
