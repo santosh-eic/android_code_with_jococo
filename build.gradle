@@ -40,13 +40,3 @@ sonar {
     property "sonar.jacoco.reportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"
   }
 }
-
-// sonarqube {
-//     properties {
-//         property "sonar.projectKey", "santosh-eic_android_code_with_jococo"
-//         property "sonar.organization", "santosh-eic"
-//         property "sonar.host.url", "https://sonarcloud.io"
-//         property "sonar.login", System.getenv("SONAR_TOKEN")  // Ensure the token is passed securely via environment variables
-//         property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"  // JaCoCo XML report path
-//     }
-// }
