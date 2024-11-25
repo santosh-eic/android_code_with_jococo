@@ -24,6 +24,7 @@ jacoco {
 jacocoTestReport {
     reports {
         xml.enabled true  // Enable XML report for SonarCloud
+        xml.required = true
         html.enabled true // Enable HTML report for local viewing
         csv.enabled true
     }
