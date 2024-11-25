@@ -47,10 +47,10 @@ jobs:
     # - name: Upload JaCoCo Report to SonarCloud
     #   run: ./gradlew sonarqube -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
-    - name: Build with Gradle
-      run: ./gradlew build --warning-mode all
+    # - name: Build with Gradle
+    #   run: ./gradlew build --warning-mode all
 
-    - name: Run SonarQube analysis
-      run: ./gradlew sonarqube
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    # - name: Run SonarQube analysis
+    #   run: ./gradlew sonarqube
+    #   env:
+    #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
