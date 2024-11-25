@@ -4,7 +4,7 @@
 plugins {
     id 'java'
     id 'jacoco'
-    id 'org.sonarqube' version '3.0'
+    id "org.sonarqube" version "6.0.0.5145"
 }
 
 
@@ -31,22 +31,20 @@ jacocoTestReport {
 
 check.dependsOn jacocoTestReport
 
+sonar {
+  properties {
+    property "sonar.projectKey", "santosh-eic_android_code_with_jococo"
+    property "sonar.organization", "santosh-eic"
+    property "sonar.host.url", "https://sonarcloud.io"
+  }
+}
+
 // sonarqube {
 //     properties {
-//         property "sonar.projectKey", "santosh-eic_android_code_with_jococo"   // Replace with your project key from SonarCloud
-//         property "sonar.organization", "santosh-eic"     // Replace with your organization key from SonarCloud
+//         property "sonar.projectKey", "santosh-eic_android_code_with_jococo"
+//         property "sonar.organization", "santosh-eic"
 //         property "sonar.host.url", "https://sonarcloud.io"
-//         property "sonar.login", System.getenv("SONAR_TOKEN")  // Make sure to pass the SonarCloud token securely
-//         property "sonar.javascript.lcov.reportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"  // Link the JaCoCo XML report
+//         property "sonar.login", System.getenv("SONAR_TOKEN")  // Ensure the token is passed securely via environment variables
+//         property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"  // JaCoCo XML report path
 //     }
 // }
-
-sonarqube {
-    properties {
-        property "sonar.projectKey", "santosh-eic_android_code_with_jococo"
-        property "sonar.organization", "santosh-eic"
-        property "sonar.host.url", "https://sonarcloud.io"
-        property "sonar.login", System.getenv("SONAR_TOKEN")  // Ensure the token is passed securely via environment variables
-        property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"  // JaCoCo XML report path
-    }
-}
