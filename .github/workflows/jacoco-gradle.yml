@@ -55,5 +55,5 @@ jobs:
       run: echo "SONAR_TOKEN=${{ secrets.SONAR_TOKEN }}" >> $GITHUB_ENV
 
     - name: Run SonarQube analysis
-      run: ./gradlew sonar -Dsonar.host.url=https://sonarcloud.io 
-
+      #run: ./gradlew sonar -Dsonar.host.url=https://sonarcloud.io 
+      run: ./gradlew test jacocoTestReport sonarqube -Dsonar.host.url=https://sonarcloud.io
